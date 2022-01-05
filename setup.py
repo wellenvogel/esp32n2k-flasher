@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 """esphomeflasher setup script."""
 import os
-
+import flashtool.flashtool
 from setuptools import setup, find_packages
 
-from esphomeflasher import const
 
 PROJECT_NAME = 'esp32n2kflasher'
 PROJECT_PACKAGE_NAME = 'esp32n2kflasher'
@@ -21,7 +20,7 @@ PYPI_URL = 'https://pypi.python.org/pypi/{}'.format(PROJECT_PACKAGE_NAME)
 GITHUB_PATH = '{}/{}'.format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = 'https://github.com/{}'.format(GITHUB_PATH)
 
-DOWNLOAD_URL = '{}/archive/{}.zip'.format(GITHUB_URL, const.__version__)
+DOWNLOAD_URL = '{}/archive/{}.zip'.format(GITHUB_URL, flashtool.flashtool.VERSION)
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -34,7 +33,7 @@ with open(os.path.join(here, 'README.md')) as readme:
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version=const.__version__,
+    version=flashtool.flashtool.VERSION,
     license=PROJECT_LICENSE,
     url=GITHUB_URL,
     download_url=DOWNLOAD_URL,
