@@ -116,3 +116,9 @@ config/
 
 # Local History for Visual Studio Code
 .history/
+
+pyvenv.cfg
+bin
+lib64
+lib
+share

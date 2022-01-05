@@ -22,11 +22,11 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher\__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher  flashtool\__main__.py
       - uses: actions/upload-artifact@v2
         with:
           name: Windows
-          path: dist/ESPHome-Flasher.exe
+          path: dist/ESP32N2K-Flasher.exe
 
   build-windows-x86:
     runs-on: windows-2019
@@ -44,13 +44,13 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher\__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher  flashtool\__main__.py
       - name: See dist directory
         run: ls dist
       - uses: actions/upload-artifact@v2
         with:
           name: Windows-x86
-          path: dist/ESPHome-Flasher.exe
+          path: dist/ESP32N2K-Flasher.exe
 
   build-ubuntu:
     runs-on: ubuntu-18.04
@@ -73,13 +73,13 @@ jobs:
          pip install -e .
      - name: Run PyInstaller
        run: |
-         python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher/__main__.py
+         python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool/__main__.py
      - name: See dist directory
        run: ls dist
      - uses: actions/upload-artifact@v2
        with:
          name: Ubuntu
-         path: dist/ESPHome-Flasher
+         path: dist/ESP32N2K-Flasher
 
 
   build-macos:
@@ -97,12 +97,12 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.icns esphomeflasher/__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool/__main__.py
       - name: See dist directory
         run: ls dist
       - name: Tar files
         run: |
-          tar -C dist -cvf dist.tar ESPHome-Flasher.app
+          tar -C dist -cvf dist.tar ESP32N2K-Flasher.app
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:

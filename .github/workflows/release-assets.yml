@@ -21,12 +21,12 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher\__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool\__main__.py
       - uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/ESPHome-Flasher.exe
-          asset_name: ESPHome-Flasher-$tag-Windows-x64.exe
+          file: dist/ESP32N2K-Flasher.exe
+          asset_name: ESP32N2K-Flasher-$tag-Windows-x64.exe
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -46,14 +46,14 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher\__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool\__main__.py
       - name: See dist directory
         run: ls dist
       - uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/ESPHome-Flasher.exe
-          asset_name: ESPHome-Flasher-$tag-Windows-x86.exe
+          file: dist/ESP32N2K-Flasher.exe
+          asset_name: ESP32N2K-Flasher-$tag-Windows-x86.exe
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -78,14 +78,14 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.ico esphomeflasher/__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool/__main__.py
       - name: See dist directory
         run: ls dist
       - uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/ESPHome-Flasher
-          asset_name: ESPHome-Flasher-$tag-Ubuntu-x64.exec
+          file: dist/ESP32N2K-Flasher
+          asset_name: ESP32N2K-Flasher-$tag-Ubuntu-x64.exec
           tag: ${{ github.ref }}
           overwrite: true
 
@@ -105,16 +105,16 @@ jobs:
           pip install -e .
       - name: Run PyInstaller
         run: |
-          python -m PyInstaller.__main__ -F -w -n ESPHome-Flasher -i icon.icns esphomeflasher/__main__.py
+          python -m PyInstaller.__main__ -F -w -n ESP32N2K-Flasher flashtool/__main__.py
       - name: See dist directory
         run: ls dist
       - name: Tar files
         run: |
-          tar -C dist -cvf dist.tar ESPHome-Flasher.app
+          tar -C dist -cvf dist.tar ESP32N2K-Flasher.app
       - uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist.tar
-          asset_name: ESPHome-Flasher-$tag-macOS.tar
+          asset_name: ESP32N2K-Flasher-$tag-macOS.tar
           tag: ${{ github.ref }}
           overwrite: true

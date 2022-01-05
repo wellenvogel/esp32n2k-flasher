@@ -6,16 +6,16 @@ from setuptools import setup, find_packages
 
 from esphomeflasher import const
 
-PROJECT_NAME = 'esphomeflasher'
-PROJECT_PACKAGE_NAME = 'esphomeflasher'
+PROJECT_NAME = 'esp32n2kflasher'
+PROJECT_PACKAGE_NAME = 'esp32n2kflasher'
 PROJECT_LICENSE = 'MIT'
-PROJECT_AUTHOR = 'ESPHome'
-PROJECT_COPYRIGHT = '2021, ESPHome'
-PROJECT_URL = 'https://esphome.io/guides/faq.html'
-PROJECT_EMAIL = 'contact@esphome.io'
+PROJECT_AUTHOR = 'wellenvogel'
+PROJECT_COPYRIGHT = '2021, wellenvogel'
+PROJECT_URL = 'https://github.com/wellenvogel/esp32n2k-flasher'
+PROJECT_EMAIL = 'andreas@wellenvogel.net'
 
-PROJECT_GITHUB_USERNAME = 'esphome'
-PROJECT_GITHUB_REPOSITORY = 'esphome-flasher'
+PROJECT_GITHUB_USERNAME = 'wellenvogel'
+PROJECT_GITHUB_REPOSITORY = 'esp32n2k-flasher'
 
 PYPI_URL = 'https://pypi.python.org/pypi/{}'.format(PROJECT_PACKAGE_NAME)
 GITHUB_PATH = '{}/{}'.format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
@@ -52,8 +52,8 @@ setup(
     keywords=['boat', 'nmea2000'],
     entry_points={
         'console_scripts': [
-            'esp32n2kflashtool = esphomeflasher.__main__:main'
+            'esp32n2kflashtool = flashtool.__main__:main'
         ]
     },
-    packages=find_packages(include="esphomerelease.*")
+    packages=find_packages(include="esp32n2k-flasher.*")
 )

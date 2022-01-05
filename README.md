@@ -1,16 +1,13 @@
-# ESPHome-Flasher
+# ESP32N2K Flasher
 
-ESPHome-Flasher is a utility app for the [ESPHome](https://esphome.io/)
-framework and is designed to make flashing ESPs with ESPHome as simple as possible by:
+ESP32N2kFlasher is a utility app for the [esp32nmea2000 gateway](https://github.com/wellenvogel/esp32-nmea2000)
+framework and is designed to make flashing the firmware as simple as possible by:
 
  * Having pre-built binaries for most operating systems.
- * Hiding all non-essential options for flashing. All necessary options for flashing
-   (bootloader, flash mode) are automatically extracted from the binary.
+ * Hiding all non-essential options for flashing.
 
-This project was originally intended to be a simple command-line tool,
-but then I decided that a GUI would be nice. As I don't like writing graphical
-front end code, the GUI largely is based on the
-[NodeMCU PyFlasher](https://github.com/marcelstoer/nodemcu-pyflasher)
+The Project is based on
+[ESPHome-Flasher](https://github.com/esphome/esphome-flasher/tree/main/esphomeflasher)
 project.
 
 The flashing process is done using the [esptool](https://github.com/espressif/esptool)
@@ -19,7 +16,7 @@ library by espressif.
 ## Installation
 
 It doesn't have to be installed, just double-click it and it'll start.
-Check the [releases section](https://github.com/esphome/esphome-flasher/releases)
+Check the [releases section](../../releases)
 for downloads for your platform.
 
 ## Installation Using `pip`
@@ -46,8 +43,7 @@ pip3 install --upgrade pip
 pip3 install --no-use-pep517 -e .
 ```
 - Download this project and run `pip3 install -e .` in the project's root.
-- Start the GUI using `esphomeflasher`. Alternatively, you can use the command line interface (
-  type `esphomeflasher -h` for info)
+- Start the GUI using `esp32n2kflashtool`. 
 
 
 ## Linux Notes
@@ -65,4 +61,4 @@ pip3 install -U \
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © Marcel Stör, Otto Winter
+[MIT](http://opensource.org/licenses/MIT) © Marcel Stör, Otto Winter, Andreas Vogel
