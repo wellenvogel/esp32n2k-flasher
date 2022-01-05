@@ -2,7 +2,7 @@
 
 import os
 import esptool
-VERSION="1.4"
+VERSION="1.5"
 
 class Flasher():
     def getVersion(self):

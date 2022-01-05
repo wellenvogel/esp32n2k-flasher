@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """esphomeflasher setup script."""
 import os
-import flashtool.flashtool
+VERSION="1.5"
 from setuptools import setup, find_packages
 
 
@@ -20,7 +20,7 @@ PYPI_URL = 'https://pypi.python.org/pypi/{}'.format(PROJECT_PACKAGE_NAME)
 GITHUB_PATH = '{}/{}'.format(PROJECT_GITHUB_USERNAME, PROJECT_GITHUB_REPOSITORY)
 GITHUB_URL = 'https://github.com/{}'.format(GITHUB_PATH)
 
-DOWNLOAD_URL = '{}/archive/{}.zip'.format(GITHUB_URL, flashtool.flashtool.VERSION)
+DOWNLOAD_URL = '{}/archive/{}.zip'.format(GITHUB_URL, VERSION)
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -33,7 +33,7 @@ with open(os.path.join(here, 'README.md')) as readme:
 
 setup(
     name=PROJECT_PACKAGE_NAME,
-    version=flashtool.flashtool.VERSION,
+    version=VERSION,
     license=PROJECT_LICENSE,
     url=GITHUB_URL,
     download_url=DOWNLOAD_URL,
