@@ -25,7 +25,8 @@ class MainFrame(wx.Frame):
 
         self._firmware = None
         self._port = None
-
+        self.flasher = Flasher()
+        self.interrupt = False
         self._init_ui()
 
         frame=self
@@ -37,8 +38,6 @@ class MainFrame(wx.Frame):
 
         self.SetMinSize((640, 480))
         self.Centre(wx.BOTH)
-        self.flasher=Flasher()
-        self.interrupt=False
         self.Show(True)
 
     def addText(self,*args,**kwargs):
@@ -52,7 +51,7 @@ class MainFrame(wx.Frame):
             self.console_ctrl.AppendText("\n")
         else:
             self.console_ctrl.AppendText(kwargs.get('end'))
-        #self.text_widget.see('end')
+        self.console_ctrl.SetInsertionPoint(-1)
         wx.Yield()
         if self.interrupt:
             self.interrupt=False
@@ -96,7 +95,7 @@ class MainFrame(wx.Frame):
 
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
-        fgs = wx.FlexGridSizer(8, 2, 10, 10)
+        fgs = wx.FlexGridSizer(10, 2, 10, 10)
         self.mode = wx.RadioBox(panel,choices=['initial','update'],label="mode")
         self.mode.Bind(wx.EVT_RADIOBOX,onMode)
         self.choice = wx.Choice(panel, choices=self._get_serial_ports())
@@ -104,7 +103,7 @@ class MainFrame(wx.Frame):
         reload_button = wx.Button(
             panel,
             id=wx.ID_ANY,
-            label="reload"
+            label="Reload"
         )
         reload_button.Bind(wx.EVT_BUTTON, on_reload)
         reload_button.SetToolTip("Reload serial device list")
@@ -150,6 +149,8 @@ class MainFrame(wx.Frame):
         fgs.AddMany(
             [
                 (wx.StaticText(panel, label="")),
+                (wx.StaticText(panel, label=self.flasher.getVersion()),1,wx.EXPAND),
+                (wx.StaticText(panel, label="")),
                 (self.mode,1,wx.EXPAND),
                 # Port selection row
                 port_label,
@@ -172,7 +173,7 @@ class MainFrame(wx.Frame):
                 (self.console_ctrl, 1, wx.EXPAND),
             ]
         )
-        fgs.AddGrowableRow(7, 1)
+        fgs.AddGrowableRow(8, 1)
         fgs.AddGrowableCol(1, 1)
         hbox.Add(fgs, proportion=2, flag=wx.ALL | wx.EXPAND, border=15)
         panel.SetSizer(hbox)
@@ -181,8 +182,6 @@ class MainFrame(wx.Frame):
         ports = []
         for port, _ in list_serial_ports():
             ports.append(port)
-        if not self._port and ports:
-            self._port = ports[0]
         if not ports:
             ports.append("")
         return ports

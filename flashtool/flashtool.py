@@ -118,7 +118,7 @@ def dummy():
 '''
 class Flasher():
     def getVersion(self):
-        return ("Version 1.1, esptool 3.2")
+        return ("Version 1.2, esptool %s"%str(esptool.__version__))
     FULLOFFSET=61440
     HDROFFSET = 288
     VERSIONOFFSET = 16
