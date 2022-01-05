@@ -38,6 +38,13 @@ If you want to build this application yourself you need to:
 
 - Install Python 3.x
 - Install [wxPython 4.x](https://wxpython.org/) manually or run `pip3 install wxpython`
+- venv handling:
+```
+python3 -m venv --system-site-packages .
+source bin/activate
+pip3 install --upgrade pip
+pip3 install --no-use-pep517 -e .
+```
 - Download this project and run `pip3 install -e .` in the project's root.
 - Start the GUI using `esphomeflasher`. Alternatively, you can use the command line interface (
   type `esphomeflasher -h` for info)

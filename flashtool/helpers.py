@@ -24,15 +24,3 @@ def list_serial_ports():
     result.sort()
     return result
 
-
-def prevent_print(func, *args, **kwargs):
-    orig_sys_stdout = sys.stdout
-    sys.stdout = DEVNULL
-    try:
-        return func(*args, **kwargs)
-    except serial.SerialException as err:
-        from esphomeflasher.common import EsphomeflasherError
-
-        raise EsphomeflasherError(f"Serial port closed: {err}") from err
-    finally:
-        sys.stdout = orig_sys_stdout

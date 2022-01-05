@@ -40,19 +40,19 @@ setup(
     download_url=DOWNLOAD_URL,
     author=PROJECT_AUTHOR,
     author_email=PROJECT_EMAIL,
-    description="ESP8266/ESP32 firmware flasher for ESPHome",
+    description="ESP32 firmware flasher for ESP32NMEA2000",
     include_package_data=True,
     zip_safe=False,
     platforms='any',
     test_suite='tests',
-    python_requires='>=3.7,<4.0',
+    python_requires='>=3.6.9,<4.0',
     install_requires=REQUIRES,
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    keywords=['home', 'automation'],
+    keywords=['boat', 'nmea2000'],
     entry_points={
         'console_scripts': [
-            'esphomeflasher = esphomeflasher.__main__:main'
+            'esp32n2kflashtool = esphomeflasher.__main__:main'
         ]
     },
     packages=find_packages(include="esphomerelease.*")
