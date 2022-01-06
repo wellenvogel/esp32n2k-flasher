@@ -73,7 +73,6 @@ class Flasher():
             print("esptool done")
         except Exception as e:
             print("Exception in esptool %s" % e)
-            raise
 
     def runCheck(self,port,fileName,isFull):
         param = self.checkSettings(port,fileName,isFull)

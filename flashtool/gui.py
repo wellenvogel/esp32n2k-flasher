@@ -27,6 +27,7 @@ class MainFrame(wx.Frame):
         self._port = None
         self.flasher = Flasher()
         self.interrupt = False
+        self.ports=[]
         self._init_ui()
 
         frame=self
@@ -62,16 +63,30 @@ class MainFrame(wx.Frame):
         def on_reload(event):
             self.choice.SetItems(self._get_serial_ports())
 
+        def changeButtons(run):
+            if run:
+                self.button.Disable()
+                self.check_button.Disable()
+                self.cancel_button.Enable()
+            else:
+                self.button.Enable()
+                self.check_button.Enable()
+                self.cancel_button.Disable()
+            wx.Yield()
         def isFull():
             return self.mode.GetSelection() == 0
         def onFlash(event):
             self.interrupt=False
+            changeButtons(True)
             self.console_ctrl.SetValue("")
             self.flasher.runFlash(self._port,self._firmware,isFull())
+            changeButtons(False)
         def onCheck(event):
             self.interrupt=False
+            changeButtons(True)
             self.console_ctrl.SetValue("")
             self.flasher.runCheck(self._port, self._firmware, isFull())
+            changeButtons(False)
         def onCancel(event):
             self.interrupt=True
         def onMode(event):
@@ -80,12 +95,12 @@ class MainFrame(wx.Frame):
             pass
         def on_select_port(event):
             choice = event.GetEventObject()
-            self._port = choice.GetString(choice.GetSelection())
+            self._port = self.ports[choice.GetSelection()]
 
         def on_pick_file(event):
             self._firmware = event.GetPath().replace("'", "")
             result=self.flasher.checkImageFile(self._firmware,isFull())
-            self.firmwareInfo.Label=result['info']
+            self.firmwareInfo.SetLabel(result['info'])
             if result['error']:
                 self.firmwareInfo.SetForegroundColour(wx.RED)
             else:
@@ -118,13 +133,14 @@ class MainFrame(wx.Frame):
 
         self.firmwareInfo=wx.StaticText(panel)
 
-        button = wx.Button(panel, -1, "Flash ESP")
-        button.Bind(wx.EVT_BUTTON, onFlash)
+        self.button = wx.Button(panel, -1, "Flash ESP")
+        self.button.Bind(wx.EVT_BUTTON, onFlash)
 
-        check_button = wx.Button(panel, -1, "Check")
-        check_button.Bind(wx.EVT_BUTTON, onCheck)
-        cancel_button = wx.Button(panel, -1, "Cancel")
-        cancel_button.Bind(wx.EVT_BUTTON, onCancel)
+        self.check_button = wx.Button(panel, -1, "Check")
+        self.check_button.Bind(wx.EVT_BUTTON, onCheck)
+        self.cancel_button = wx.Button(panel, -1, "Cancel")
+        self.cancel_button.Bind(wx.EVT_BUTTON, onCancel)
+        self.cancel_button.Disable()
 
         self.console_ctrl = wx.TextCtrl(
             panel, style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL
@@ -162,12 +178,12 @@ class MainFrame(wx.Frame):
                 (self.firmwareInfo,1,wx.EXPAND),
                 # Flash ESP button
                 (wx.StaticText(panel, label="")),
-                (button, 1, wx.EXPAND),
+                (self.button, 1, wx.EXPAND),
                 # View Logs button
                 (wx.StaticText(panel, label="")),
-                (check_button, 1, wx.EXPAND),
+                (self.check_button, 1, wx.EXPAND),
                 (wx.StaticText(panel, label="")),
-                (cancel_button, 1, wx.EXPAND),
+                (self.cancel_button, 1, wx.EXPAND),
                 # Console View (growable)
                 (console_label, 1, wx.EXPAND),
                 (self.console_ctrl, 1, wx.EXPAND),
@@ -179,12 +195,15 @@ class MainFrame(wx.Frame):
         panel.SetSizer(hbox)
 
     def _get_serial_ports(self):
-        ports = []
-        for port, _ in list_serial_ports():
-            ports.append(port)
-        if not ports:
-            ports.append("")
-        return ports
+        self.ports = []
+        rt=[]
+        for port,desc in list_serial_ports():
+            self.ports.append(port)
+            rt.append("%s[%s]"%(port,desc))
+        if not self.ports:
+            self.ports.append("")
+            rt.append("")
+        return rt
 
     # Menu methods
     def _on_exit_app(self, event):
