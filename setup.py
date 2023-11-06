@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """esphomeflasher setup script."""
 import os
-from flashtool.version import VERSION
+VERSION="2.1"
 
 from setuptools import setup, find_packages
 

@@ -9,7 +9,7 @@ import wx.adv
 import wx.lib.inspection
 import wx.lib.mixins.inspection
 from wx.lib.embeddedimage import PyEmbeddedImage
-from flashtool.flashtool import Flasher
+from flashtool.flasher import Flasher
 from flashtool.helpers import list_serial_ports
 
 class MainFrame(wx.Frame):
@@ -79,7 +79,7 @@ class MainFrame(wx.Frame):
             self.interrupt=False
             changeButtons(True)
             self.console_ctrl.SetValue("")
-            self.flasher.runFlash(self._port,self._firmware,isFull())
+            self.flasher.runFlash(self.flasher.runCheck(self._port, self._firmware, isFull()))
             changeButtons(False)
         def onCheck(event):
             self.interrupt=False
